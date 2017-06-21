@@ -18,100 +18,7 @@
 
 <link rel="stylesheet" href="../resources/styles.css">
 
-<script type="text/javascript">
-
-	$(function(){
-		
-		$("#btn_Add").click(function()
-		{				
-			$("#error_1").text("");
-			var id = $("#ddl_Products").val();
-			var name = $("#" + id + "_name").val();
-			var price = $("#" + id + "_price").val();
-			var type = $("#" + id + "_type").val();
-			var description = $("#" + id + "_description").val();
-			var quantity = $("#txt_Quantity").val();
-			var valueProperty = id + ',' + name + ',' + price + ',' + type + ',' + description + ',' + quantity;
-			
-			if(quantity == '')
-			{
-				$("#error_1").text("Select the quantity");
-				return;
-			}
-			
-			var element = $("<option>",{
-				value 		: valueProperty,
-				text  		: (name + ' (' + quantity + ')')
-			})
-							
-			$("#list_Products").append(element);
-			$("#txt_Quantity").val("");
-			
-		});
-		
-		$("#btn_Save").click(function()
-		{			
-			var data = [];
-			var counter = 0;
-			var jsonString = "";
-			
-			$("#list_Products").children().each(function()
-			{
-				var product = $(this).val().split(',');
-				var objOrderLine;
-				var objOrder;
-				let csrfName = $("#hiddenField").attr("name");
-				let csrfValue = $("#hiddenField").attr("value");
-								
-				var objProduct = {
-						id			: product[0],
-						productName	: product[1],
-						price		: product[2],
-						type		: product[3],
-						description	: product[4]
-					};
-					
-				orderLine = {
-						id		:		0,
-						product	:	objProduct,
-						quantity:	product[5]
-				}
-						
-				data[counter] = orderLine;
-				counter++;
-			});
-			
-						
-			objOrder = {
-				"id"			: 	"0",
-				"orderLines"	:	data
-			};
-			
-			jsonString = JSON.stringify(objOrder);
-			
-			if(counter > 0)
-			{
-				$.ajax("/orders/create2",{
-					"type"			: "GET",
-					"data"			: {
-						"myData"	: 	jsonString
-					}
-				}).done(function(){alert('success');})
-				  .fail(function(){alert('process failed!');});	
-			}
-			
-		});
-		
-		$("#btn_Remove").click(function()
-		{
-			$("#list_Products").children().remove();			
-		});
-		
-		
-		
-	});
-	
-</script>
+<script type="text/javascript" src="../resources/scripts.js"></script>
 
 
 </head>
@@ -121,19 +28,19 @@
 		<h1>Order Detail </h1>	
 		
 						
-			<p>Order Date:</p>
-			<p>
+			<p><label>Order Date:</label></p>
+			<p id="txt_Date">
 				<%= new java.text.SimpleDateFormat("MM/dd/yyyy").format(new java.util.Date()) %>
 			</p>
 					
-			<p>Person:</p>		
-			<p>
+			<p><label>Person:</label></p>		
+			<span>
 				<label>${user.firstName} </label><label>${user.lastName} </label>	
-			</p>
+			</span>
 			
 			<hr/>
 			
-			<h5>Order Lines </h5>	
+			<h2><b>Order Lines</b></h2>	
 			
 			<p>
 				<label>Products:</label>

@@ -22,32 +22,30 @@
 <body>
 	<div class="detailsContainer">
 	
-		<h1>Order Line </h1>	
-		<form method="post" action="../orders/addOrderLine" >
-			
-			<input type="hidden" name="id" value="${orderId}">
-			<p>Product:</p>
-			<p>
-				<select  class="form-control" name="product">
-				  <c:forEach var="p" items="${products}">
-				  	<option value="${p}">${p}</option>
-				  </c:forEach>
-				</select>
-			</p>
-					
-			<p>Quantity:</p>		
-			<p>
-				<input type="text" name="orderLine.quantity">	
-			</p>
-						
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-			
-			<button type="submit" class="btn btn-success">
-				    Add
-			</button>			
-		</form>
+		<h1>Order Lines </h1>	
 		
-		<a href="/orders/update?id=${orderId}"><button type="button" class="btn btn-primary">Continue</button></a>
+		<table class="table table-striped">
+			<thead>
+			  <tr>
+			     <th>Id</th>
+			     <th>Product</th>
+			     <th>Quantity</th>			     			     
+			  </tr>
+			</thead>
+			
+			<tbody>
+			<c:forEach var="orderLine" items="${orderLines}">
+				<tr>
+					<td>${orderLine.id}</td>
+					<td>${orderLine.product.productName}</td>
+					<td>${orderLine.quantity}</td>
+				</tr>
+			</c:forEach>
+			</tbody>
+			
+		</table>
+		
+		<a href="/orders"><button type="button" class="btn btn-primary">Return</button></a>
 		
 	</div>
 </body>

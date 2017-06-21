@@ -23,12 +23,17 @@
 	<div class="containerList">
 	
 		<div>
+			<div>
 			<label>
 				<a href="/persons/"><button type="button" class="btn btn-primary">PERSONS</button></a>
 			</label>
 			<label>
 				<a href="/products/"><button type="button" class="btn btn-primary">PRODUCTS</button></a>
 			</label>		
+			<label>
+				<a href="/orders/"><button type="button" class="btn btn-primary">ORDERS</button></a>
+			</label>		
+		</div>	
 		</div>
 		<h1>List of Products</h1>
 	

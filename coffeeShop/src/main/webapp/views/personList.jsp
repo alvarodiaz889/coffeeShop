@@ -29,6 +29,9 @@
 			<label>
 				<a href="/products/"><button type="button" class="btn btn-primary">PRODUCTS</button></a>
 			</label>		
+			<label>
+				<a href="/orders/"><button type="button" class="btn btn-primary">ORDERS</button></a>
+			</label>		
 		</div>
 		<h1>List of Persons</h1>
 	

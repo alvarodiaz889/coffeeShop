@@ -14,12 +14,22 @@ public class Orderline {
 	@Id
 	@GeneratedValue
 	private int id;
+	
 	private int quantity;
 	@OneToOne
 	private Product product;
 	@ManyToOne
 	private Order order;
 
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public int getQuantity() {
 		return quantity;
 	}

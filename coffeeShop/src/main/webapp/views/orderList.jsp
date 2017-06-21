@@ -27,7 +27,10 @@
 				<a href="/persons/"><button type="button" class="btn btn-primary">PERSONS</button></a>
 			</label>
 			<label>
-				<a href="/orders/"><button type="button" class="btn btn-primary">PRODUCTS</button></a>
+				<a href="/products/"><button type="button" class="btn btn-primary">PRODUCTS</button></a>
+			</label>		
+			<label>
+				<a href="/orders/"><button type="button" class="btn btn-primary">ORDERS</button></a>
 			</label>		
 		</div>
 		<h1>List of Orders</h1>
@@ -48,7 +51,7 @@
 					<td>${order.id}</td>
 					<td>${order.orderDate}</td>
 					<td>
-						<a href="/orders/getOrderLines?id=${order.id}"><button type="submit" class="btn btn-warning">Order Lines</button></a>											
+						<a href="/orders/getOrderLines?id=${order.id}"><button class="btn btn-warning">Order Lines</button></a>											
 					</td>
 					<td>${order.person.firstName}</td>					
 					 
