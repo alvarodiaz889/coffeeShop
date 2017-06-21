@@ -4,11 +4,20 @@
 	margin: 10px auto;    
 }
 
-.detailsContainer
+.selectClass
 {
-	background-color: gray;
+	width: 300px;
+	margin: 10px
 }
 
 .containerList{
 	padding: 20px;
+}
+
+#ddl_Products{
+	display:inline;
+}
+
+.redAlert{
+	color : red;
 }

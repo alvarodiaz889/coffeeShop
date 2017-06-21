@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>List of Products</title>
+<title>List of Orders</title>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -64,7 +64,7 @@
 			
 		</table>
 			
-		<a href="/orders/update?id=0"><button type="button" class="btn btn-primary">Add</button></a>
+		<a href="/orders/create"><button type="button" class="btn btn-primary">Add</button></a>
 	</div>	
 	
 </body>
