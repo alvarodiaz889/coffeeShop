@@ -1,41 +1,53 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>List of Products</title>
-
-<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 <link rel="stylesheet" href="../resources/styles.css">
 
 </head>
 <body>
-	<div class="containerList">
-	
-		<div>
-			<div>
-			<label>
-				<a href="/persons/"><button type="button" class="btn btn-primary">PERSONS</button></a>
-			</label>
-			<label>
-				<a href="/products/"><button type="button" class="btn btn-primary">PRODUCTS</button></a>
-			</label>		
-			<label>
-				<a href="/orders/"><button type="button" class="btn btn-primary">ORDERS</button></a>
-			</label>		
-		</div>	
+
+	<nav class="navbar navbar-inverse">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">Coffee Shop</a>
+		    </div>
+		    <ul class="nav navbar-nav">
+		      <li class="active"><a href="#">Home</a></li>		      
+		      
+		      <sec:authorize access="hasRole('USER')">
+		      	<li><a href="#">Profile</a></li>
+		      </sec:authorize>
+		      
+		      <sec:authorize access="hasRole('ADMIN')">
+		      	<li><a href="/products/">Products</a></li>
+		      	<li><a href="/persons/">Persons</a></li>
+		      </sec:authorize>
+		      
+		      
+		      <sec:authorize access="hasAnyRole('ADMIN','USER')">
+		      	<li><a href="/orders/">Orders</a></li>
+		      	<li><a href="/logout/">Log Out</a></li>
+		      </sec:authorize>		      
+		      
+		      <li><a href="/login/">Log In</a></li>
+		    </ul>
+		  </div>
+		</nav>
+	<section>
+		<div class="jumbotron">
+			<div class="container">
+				<h1>Products</h1>
+			</div>
 		</div>
-		<h1>List of Products</h1>
+		
+	</section>
+	<div class="containerList">	
 	
 		<table class="table table-striped">
 			<thead>

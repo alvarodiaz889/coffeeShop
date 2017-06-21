@@ -21,3 +21,16 @@
 .redAlert{
 	color : red;
 }
+
+.header3{
+		
+	width		: 400px;
+	display		: block;
+	margin		: 10px auto;
+	text-align	: center;
+}
+
+.myTable1{
+	width : 70px;
+	margin: 10px auto;
+}
