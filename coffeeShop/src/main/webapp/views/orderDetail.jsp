@@ -41,7 +41,7 @@
 			
 			var element = $("<option>",{
 				value 		: valueProperty,
-				text  		: name
+				text  		: (name + ' (' + quantity + ')')
 			})
 							
 			$("#list_Products").append(element);
@@ -51,31 +51,53 @@
 		
 		$("#btn_Save").click(function()
 		{			
-			var data[];
+			var data = [];
+			var counter = 0;
+			var jsonString = "";
+			
 			$("#list_Products").children().each(function()
 			{
-				var product[] = $(this.val()).split(',');
-				
-				var obj = {
-					id			: product[0],
-					productName	: product[1],
-					price		: product[2],
-					type		: product[3],
-					description	: product[4],
-				};
-				data += ;		
+				var product = $(this).val().split(',');
+				var objOrderLine;
+				var objOrder;
+				let csrfName = $("#hiddenField").attr("name");
+				let csrfValue = $("#hiddenField").attr("value");
+								
+				var objProduct = {
+						id			: product[0],
+						productName	: product[1],
+						price		: product[2],
+						type		: product[3],
+						description	: product[4]
+					};
+					
+				orderLine = {
+						id		:		0,
+						product	:	objProduct,
+						quantity:	product[5]
+				}
+						
+				data[counter] = orderLine;
+				counter++;
 			});
 			
-			if(data.length > 0)
-			{
-				$.ajax("/orders/create",{
-					"type":"POST",
-					"data": { 
-						"property": postId
 						
+			objOrder = {
+				"id"			: 	"0",
+				"orderLines"	:	data
+			};
+			
+			jsonString = JSON.stringify(objOrder);
+			
+			if(counter > 0)
+			{
+				$.ajax("/orders/create2",{
+					"type"			: "GET",
+					"data"			: {
+						"myData"	: 	jsonString
 					}
-				}).done(function(a,b,c){saveLikeSuccess(a,b,c,postId);})
-				  .fail(showError);	
+				}).done(function(){alert('success');})
+				  .fail(function(){alert('process failed!');});	
 			}
 			
 		});
@@ -84,6 +106,8 @@
 		{
 			$("#list_Products").children().remove();			
 		});
+		
+		
 		
 	});
 	
