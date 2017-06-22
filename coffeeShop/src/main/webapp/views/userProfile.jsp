@@ -22,7 +22,7 @@
 	<div class="detailsContainer">
 	
 		<h1>User Detail </h1>	
-		<form method="post" action="../persons/update2" >
+		<form method="post" action="../users/update" >
 			
 			<input type="hidden" name="id" value="${person.id}">
 			<p>First Name:</p>
@@ -67,9 +67,9 @@
 			<p>
 				<input type="text" name="zipcode" value="${person.address.zipcode}" >
 			</p>
-			
+			<!-- Data for the user -->
 			<hr/>
-			
+						
 			<p>User:</p>
 			<p>
 				<input type="text" name="user" value="${user.user}" >

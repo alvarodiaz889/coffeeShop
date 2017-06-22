@@ -44,7 +44,7 @@ public class OrdersWS {
 				System.out.println(ex.getMessage());
 				return "01";
 			}
-			order.setPerson(personService.findById(3L));
+			//order.setPerson(personService.findById(3L));
 			order.setOrderDate(Utility.getDate());			
 			for(Orderline ol:order.getOrderLines())
 				ol.setOrder(order);

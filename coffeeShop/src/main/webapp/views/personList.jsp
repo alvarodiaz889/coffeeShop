@@ -21,7 +21,7 @@
 		      <li class="active"><a href="#">Home</a></li>		      
 		      
 		      <sec:authorize access="hasRole('USER')">
-		      	<li><a href="#">Profile</a></li>
+		      	<li><a href="/users/profile">Profile</a></li>
 		      </sec:authorize>
 		      
 		      <sec:authorize access="hasRole('ADMIN')">
@@ -35,7 +35,6 @@
 		      	<li><a href="/logout/">Log Out</a></li>
 		      </sec:authorize>		      
 		      
-		      <li><a href="/login/">Log In</a></li>
 		    </ul>
 		  </div>
 		</nav>

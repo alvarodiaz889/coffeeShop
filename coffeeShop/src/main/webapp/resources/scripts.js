@@ -10,7 +10,7 @@ $(function(){
 			var description = $("#" + id + "_description").val();
 			var quantity = $("#txt_Quantity").val();
 			var valueProperty = id + ',' + name + ',' + price + ',' + type + ',' + description + ',' + quantity;
-			
+						
 			if(quantity == '')
 			{
 				$("#error_1").text("Select the quantity");
@@ -32,6 +32,7 @@ $(function(){
 			var data = [];
 			var counter = 0;
 			var jsonString = "";
+			var personData = $("#personData").val().split(',');
 			
 			$("#list_Products").children().each(function()
 			{
@@ -39,7 +40,7 @@ $(function(){
 				var objOrderLine;
 				var objOrder;
 				var csrfName = $("#hiddenField").attr("name");
-				var csrfValue = $("#hiddenField").attr("value");
+				var csrfValue = $("#hiddenField").attr("value");				
 				
 				var objProduct = {
 						id			: product[0],
@@ -59,10 +60,13 @@ $(function(){
 				counter++;
 			});
 			
-						
+			alert(personData[0]);
 			objOrder = {
 				"id"			: 	"0",
-				"orderLines"	:	data
+				"orderLines"	:	data,
+				"person"		:	{
+						"id"			: 	personData[0]
+				}
 			};
 			
 			jsonString = JSON.stringify(objOrder);

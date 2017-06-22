@@ -2,7 +2,10 @@ package edu.mum.coffee.controller;
 
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.google.gson.Gson;
 import edu.mum.coffee.domain.Order;
 import edu.mum.coffee.domain.Orderline;
+import edu.mum.coffee.domain.Person;
+import edu.mum.coffee.domain.User;
 import edu.mum.coffee.service.OrderService;
 import edu.mum.coffee.service.PersonService;
 import edu.mum.coffee.service.ProductService;
+import edu.mum.coffee.service.UserService;
 import edu.mum.coffee.utilities.Utility;
 
 @Controller
@@ -25,9 +31,29 @@ public class OrdersController {
 	PersonService personService;
 	@Autowired
 	ProductService productService;
+	@Autowired
+	UserService userService;
 		
 	@RequestMapping(value="/orders")
-	public String selectAll(Model model) {
+	public String selectAll(HttpServletRequest request,Model model) {
+		
+		try{
+			HttpSession session = request.getSession(); 
+			if(session.getAttribute("user")== null)
+			{
+				String user = SecurityContextHolder.getContext().getAuthentication().getName();
+				User u = userService.findByUser(user).get(0);
+				Person p = null;
+				List<Person> persons = personService.findByEmail(u.getEmail());
+				if(persons.size() > 0)
+					p = persons.get(0);
+				session.setAttribute("user", u);
+				session.setAttribute("person", p);
+			}
+		}catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+		}		
 		model.addAttribute("orders", service.findAll());
 		return "orderList";
 	}	
@@ -36,13 +62,16 @@ public class OrdersController {
 	public String create(HttpServletRequest request, Model model) {
 		model.addAttribute("products", productService.getAll());	
 		//must be the user in session
-		model.addAttribute("user", personService.findById(3L));	
+		HttpSession session = request.getSession();
+		Person p = (Person)session.getAttribute("person");
+		model.addAttribute("user", p);	
 		return "orderDetail";
 	}
 		
 	@RequestMapping(value="/orders/save", method=RequestMethod.GET)
-	public String save(@RequestParam("myData") String  myData) 
+	public String save(HttpServletRequest request, @RequestParam("myData") String  myData) 
 	{
+		HttpSession session = request.getSession();
 		if(myData != null)
 		{
 			Gson json =new Gson();
@@ -54,7 +83,8 @@ public class OrdersController {
 				System.out.println(ex.getMessage());
 				return "redirect:/orders";
 			}
-			order.setPerson(personService.findById(3L));
+			Person p = (Person)session.getAttribute("person");
+			order.setPerson(p);
 			order.setOrderDate(Utility.getDate());			
 			for(Orderline ol:order.getOrderLines())
 				ol.setOrder(order);

@@ -33,9 +33,11 @@
 				<%= new java.text.SimpleDateFormat("MM/dd/yyyy").format(new java.util.Date()) %>
 			</p>
 					
-			<p><label>Person:</label></p>		
+			<p><label>Person:</label></p>	
+				
 			<span>
-				<label>${user.firstName} </label><label>${user.lastName} </label>	
+				<input id="personData" type="hidden" value="${user.id},${user.firstName},${user.lastName},${user.email},${user.phone},${user.address.id}" />
+				<label>${user.firstName} </label>-<label>${user.lastName} </label>	
 			</span>
 			
 			<hr/>

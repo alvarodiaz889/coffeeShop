@@ -11,5 +11,6 @@ import edu.mum.coffee.domain.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
 	public List<User> findByEmail(String email);
+	public List<User> findByUser(String user);
 	
 }

@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.exceptionHandling().accessDeniedPage("/login?accessDenied");
 		httpSecurity.authorizeRequests()
 			.antMatchers("/").permitAll()
-			.antMatchers("/**/orders/**").access("hasRole('ROLE_ADMIN')")
+			.antMatchers("/**/orders/**").access("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 			.antMatchers("/**/persons/**").access("hasRole('ROLE_ADMIN')")
 			.antMatchers("/**/products/**").access("hasRole('ROLE_ADMIN')");
 		
@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		//auth.inMemoryAuthentication().withUser("super").password("pw").roles("ADMIN");
 		//auth.inMemoryAuthentication().withUser("a").password("1").roles("USER");
 		auth.jdbcAuthentication().dataSource(dataSource)
-		.usersByUsernameQuery("select user,password, enable from user where user=?")
+		.usersByUsernameQuery("select user,password, enable,email from user where user=?")
 		.authoritiesByUsernameQuery("select user,rol from user where user=?");
 	}
 }
