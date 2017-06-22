@@ -14,7 +14,6 @@
 		<div class="jumbotron">
 			<div class="container">
 				<h1>Welcome to Cafe Shop !!</h1>
-				<p>The one and only amazing web store</p>
 			</div>
 		</div>
 	</section>
@@ -27,7 +26,7 @@
 					</div>
 					<div class="panel-body">
 						<c:url var="loginUrl" value="/login" />
-						<form action="${loginUrl}" method="post" class="form-horizontal">
+						<form action="/login" method="post" class="form-horizontal">
 							<c:if test="${param.error != null}">
 								<div class="alert alert-danger">
 									<p>Invalid username and password.</p>
@@ -54,10 +53,10 @@
 									class="form-control" id="password" name="password" placeholder="Enter Password" required>
 							</div>
 							<div class="form-actions">
-								<input type="submit"
-									class="btn btn-block btn-primary btn-default" value="Log in">
+								<input type="submit" class="btn btn-block btn-primary btn-default" value="Log in">
 							</div>
 						</form>
+						<a href="/users/create"><input class="btn btn-block btn-warning btn-default" value="Sign Up"></a>
 					</div>
 				</div>
 			</div>

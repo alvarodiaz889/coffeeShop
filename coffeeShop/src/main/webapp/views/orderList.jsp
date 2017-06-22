@@ -48,8 +48,11 @@
 		
 	</section>
 
+	
 
 	<div class="containerList">
+	
+		<h3>User: <sec:authentication property="principal.username" /></h3>
 	
 		<table class="table table-striped">
 			<thead>

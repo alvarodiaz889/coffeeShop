@@ -19,21 +19,7 @@
 		    </div>
 		    <ul class="nav navbar-nav">
 		      <li class="active"><a href="#">Home</a></li>		      
-		      
-		      <sec:authorize access="hasRole('ADMIN')">
-		      	<li><a href="#">Profile</a></li>
-		      </sec:authorize>
-		      
-		      <sec:authorize access="hasRole('ADMIN')">
-		      	<li><a href="/products/">Products</a></li>
-		      	<li><a href="/persons/">Persons</a></li>
-		      </sec:authorize>
-		      
-		      
-		      <sec:authorize access="hasAnyRole('ADMIN','USER')">
-		      	<li><a href="/orders/">Orders</a></li>
-		      	<li><a href="/logout/">Log Out</a></li>
-		      </sec:authorize>		      
+		         
 		      
 		      <li><a href="/login/">Log In</a></li>
 		    </ul>
